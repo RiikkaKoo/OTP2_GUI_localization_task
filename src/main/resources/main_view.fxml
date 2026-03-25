@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TripCalculatorController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="52.0" layoutY="41.0" prefHeight="473.0" prefWidth="398.0">
+         <children>
+            <Label id="mainTitle" alignment="TOP_CENTER" contentDisplay="CENTER" text="TRIP CALCULATOR">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="398.0">
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+               <children>
+                  <Label id="lblDistance" fx:id="lblDistance" maxWidth="1.7976931348623157E308" text="Distance (km):" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets left="20.0" right="20.0" />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField id="txtDistance" fx:id="txtDistance">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label id="lblConsumption" fx:id="lblConsumption" maxWidth="1.7976931348623157E308" text="Fuel Consumption (L/100km):" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField id="txtConsumption" fx:id="txtConsumption">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label id="lblPrice" fx:id="lblPrice" maxWidth="1.7976931348623157E308" text="Fuel Price (per liter):" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField id="txtPrice" fx:id="txtPrice">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button id="btnCalculate" fx:id="btnCalculate" mnemonicParsing="false" onAction="#calculate" styleClass="calcBtn" text="Calculate">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </VBox>
+            <Label id="lblResult" fx:id="lblResult" text="Results:">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Button id="btnEn" fx:id="btnEN" mnemonicParsing="false" onAction="#onENClick" styleClass="langBtn" text="English" />
+                  <Button id="btnFR" fx:id="btnFR" mnemonicParsing="false" onAction="#onFRClick" styleClass="langBtn" text="French" />
+                  <Button id="btnJP" fx:id="btnJP" mnemonicParsing="false" onAction="#onJPClick" styleClass="langBtn" text="Japanese" />
+                  <Button id="btnIR" fx:id="btnIR" mnemonicParsing="false" onAction="#onIRClick" styleClass="langBtn" text="Persian" />
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="10.0" />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>
