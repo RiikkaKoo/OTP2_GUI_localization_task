@@ -1,16 +1,24 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import service.LocalizationService;
 
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Map;
 
 public class TripCalculatorController {
 
-    private Locale currentLocale = new Locale("en", "UK");
+    private Locale currentLocale = new Locale("en", "GB");
+    private boolean isRTL = false;
+    private Map<String, String> uiTexts;
 
+    @FXML private AnchorPane rootBox;
     @FXML private Label lblResult;
     @FXML private Label lblDistance;
     @FXML private Label lblConsumption;
@@ -35,52 +43,93 @@ public class TripCalculatorController {
 
     @FXML
     private void calculate() {
-        ResourceBundle rb = ResourceBundle.getBundle("MessagesBundle", currentLocale);
         try {
-            double totalFuel = ((Double.parseDouble(txtConsumption.getText()) / 100) * Double.parseDouble(txtDistance.getText()));
-            double totalCost = (totalFuel * Double.parseDouble(txtPrice.getText()));
+
+            if (txtDistance.getText().isEmpty() || txtConsumption.getText().isEmpty() || txtPrice.getText().isEmpty()) {
+                lblResult.setText(uiTexts.get("invalid.input"));
+                return;
+            }
+
+            double distance = Double.parseDouble(txtDistance.getText());
+            double consumption = Double.parseDouble(txtConsumption.getText());
+            double price = Double.parseDouble(txtPrice.getText());
+
+            if (distance <= 0 || consumption <= 0 || price <= 0) {
+                lblResult.setText(uiTexts.get("invalid.input"));
+                return;
+            }
+
+            double totalFuel = (consumption / 100) * distance;
+            double totalCost = (totalFuel * price);
+
+            NumberFormat costFormat = NumberFormat.getCurrencyInstance(currentLocale);
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(currentLocale);
+
             String message = MessageFormat.format(
-                    rb.getString("result.label"), totalFuel, totalCost
+                    uiTexts.get("result.label"), numberFormat.format(totalFuel), costFormat.format(totalCost)
             );
             lblResult.setText(message);
         } catch (Exception e) {
             e.printStackTrace();
-            lblResult.setText(rb.getString("invalid.input"));
+            lblResult.setText(uiTexts.get("invalid.input"));
         }
     }
 
     @FXML
     private void onENClick(){
-        setLanguage(new Locale("en", "UK"));
+        this.isRTL = false;
+        setLanguage(new Locale("en", "GB"));
     }
 
     @FXML
     private void onFRClick(){
+        this.isRTL = false;
         setLanguage(new Locale("fr", "FR"));
     }
 
     @FXML
     private void onJPClick(){
+        this.isRTL = false;
         setLanguage(new Locale("ja", "JP"));
     }
 
     @FXML
     private void onIRClick(){
+        this.isRTL = true;
         setLanguage(new Locale("fa", "IR"));
     }
 
     private void setLanguage(Locale locale) {
         currentLocale = locale;
-        updateTexts();
+        uiTexts = LocalizationService.getLocalizedStrings(currentLocale);
+        Platform.runLater(() -> {
+            updateTexts();
+            updateTextDirection();
+        });
     }
 
     private void updateTexts() {
-        ResourceBundle rb = ResourceBundle.getBundle("MessagesBundle", currentLocale);
-        lblDistance.setText(rb.getString("distance.label"));
-        lblConsumption.setText(rb.getString("consumption.label"));
-        lblPrice.setText(rb.getString("price.label"));
-        btnCalculate.setText(rb.getString("calculate.button"));
+        lblDistance.setText(uiTexts.get("distance.label"));
+        lblConsumption.setText(uiTexts.get("consumption.label"));
+        lblPrice.setText(uiTexts.get("price.label"));
+        btnCalculate.setText(uiTexts.get("calculate.button"));
         lblResult.setText("");
+        }
+
+    private void updateTextDirection() {
+
+        Platform.runLater(() -> {
+            if (rootBox != null) {
+                NodeOrientation orientation = isRTL
+                        ? NodeOrientation.RIGHT_TO_LEFT
+                        : NodeOrientation.LEFT_TO_RIGHT;
+
+                rootBox.setNodeOrientation(orientation);
+                txtDistance.setNodeOrientation(orientation);
+                txtConsumption.setNodeOrientation(orientation);
+                txtPrice.setNodeOrientation(orientation);
+            }
+        });
     }
 
 }

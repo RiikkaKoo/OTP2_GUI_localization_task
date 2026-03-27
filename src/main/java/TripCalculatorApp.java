@@ -12,11 +12,8 @@ public class TripCalculatorApp extends Application {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/style.css");
+        scene.getRoot().setStyle("-fx-font-family: 'Noto Sans CJK JP', 'Noto Sans CJK', 'Noto Sans';");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

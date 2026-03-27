@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TripCalculatorController">
+<AnchorPane fx:id="rootBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TripCalculatorController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="52.0" layoutY="41.0" prefHeight="473.0" prefWidth="398.0">
          <children>
@@ -24,9 +24,6 @@
                </opaqueInsets>
                <children>
                   <Label id="lblDistance" fx:id="lblDistance" maxWidth="1.7976931348623157E308" text="Distance (km):" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
                      <opaqueInsets>
                         <Insets left="20.0" right="20.0" />
                      </opaqueInsets>
@@ -43,9 +40,6 @@
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
                   </Label>
                   <TextField id="txtConsumption" fx:id="txtConsumption">
                      <VBox.margin>
@@ -53,9 +47,6 @@
                      </VBox.margin>
                   </TextField>
                   <Label id="lblPrice" fx:id="lblPrice" maxWidth="1.7976931348623157E308" text="Fuel Price (per liter):" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="20.0" />
                      </VBox.margin>
@@ -82,9 +73,6 @@
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <VBox.margin>
