@@ -32,11 +32,13 @@ pipeline {
             }
         }
 
-        stage('Publish Test Results') {
-            steps {
-                junit '**/target/surefire-reports/*.xml'
-            }
-        }
+// No tests done for this project
+        //stage('Publish Test Results') {
+            //steps {
+                //junit '**/target/surefire-reports/*.xml'
+            //}
+        //}
+
 
         stage('Publish Coverage Report') {
             steps {
