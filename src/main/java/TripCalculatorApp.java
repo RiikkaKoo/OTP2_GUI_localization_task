@@ -14,6 +14,7 @@ public class TripCalculatorApp extends Application {
         scene.getStylesheets().add("/style.css");
         scene.getRoot().setStyle("-fx-font-family: 'Noto Sans CJK JP', 'Noto Sans CJK', 'Noto Sans';");
         stage.setScene(scene);
+        stage.setTitle("Riikka K - Trip Calculator");
         stage.show();
     }
 }
