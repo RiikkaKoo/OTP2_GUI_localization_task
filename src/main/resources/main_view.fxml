@@ -9,66 +9,85 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TripCalculatorController">
+<AnchorPane fx:id="rootBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TripCalculatorController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="52.0" layoutY="41.0" prefHeight="473.0" prefWidth="398.0">
+       <VBox fx:id="mainVBox"
+             AnchorPane.topAnchor="0.0"
+             AnchorPane.bottomAnchor="0.0"
+             AnchorPane.leftAnchor="0.0"
+             AnchorPane.rightAnchor="0.0"
+             alignment="TOP_CENTER"
+             spacing="5">
          <children>
             <Label id="mainTitle" alignment="TOP_CENTER" contentDisplay="CENTER" text="TRIP CALCULATOR">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+                <VBox.margin>
+                    <Insets top="20.0"/>
+                </VBox.margin>
             </Label>
-            <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="398.0">
-               <opaqueInsets>
-                  <Insets top="20.0" />
-               </opaqueInsets>
-               <children>
-                  <Label id="lblDistance" fx:id="lblDistance" maxWidth="1.7976931348623157E308" text="Distance (km):" VBox.vgrow="ALWAYS">
+             <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="398.0">
+                 <opaqueInsets>
+                     <Insets top="20.0"/>
+                 </opaqueInsets>
+                 <VBox.margin>
+                     <Insets top="20.0"/>
+                 </VBox.margin>
+                 <Label id="lblInfo" fx:id="lblInfo" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" textAlignment="CENTER" alignment="CENTER" wrapText="true">
+                     <VBox.margin>
+                         <Insets left="30.0" right="30.0" top="10.0" bottom="20.0"/>
+                     </VBox.margin>
                      <opaqueInsets>
-                        <Insets left="20.0" right="20.0" />
+                         <Insets left="20.0" right="20.0"/>
                      </opaqueInsets>
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField id="txtDistance" fx:id="txtDistance">
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label id="lblConsumption" fx:id="lblConsumption" maxWidth="1.7976931348623157E308" text="Fuel Consumption (L/100km):" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField id="txtConsumption" fx:id="txtConsumption">
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label id="lblPrice" fx:id="lblPrice" maxWidth="1.7976931348623157E308" text="Fuel Price (per liter):" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField id="txtPrice" fx:id="txtPrice">
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Button id="btnCalculate" fx:id="btnCalculate" mnemonicParsing="false" onAction="#calculate" styleClass="calcBtn" text="Calculate">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </VBox>
+                 </Label>
+                 <Label id="lblDistance" fx:id="lblDistance" maxWidth="1.7976931348623157E308" text="Distance (km):"
+                        VBox.vgrow="ALWAYS">
+                    <opaqueInsets>
+                        <Insets left="20.0" right="20.0"/>
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                    </VBox.margin>
+                 </Label>
+                 <TextField id="txtDistance" fx:id="txtDistance">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                    </VBox.margin>
+                 </TextField>
+                 <Label id="lblConsumption" fx:id="lblConsumption" maxWidth="1.7976931348623157E308"
+                        text="Fuel Consumption (L/100km):" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0"/>
+                    </VBox.margin>
+                 </Label>
+                 <TextField id="txtConsumption" fx:id="txtConsumption">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                    </VBox.margin>
+                 </TextField>
+                 <Label id="lblPrice" fx:id="lblPrice" maxWidth="1.7976931348623157E308" text="Fuel Price (per liter):"
+                        VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0"/>
+                    </VBox.margin>
+                 </Label>
+                 <TextField id="txtPrice" fx:id="txtPrice">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                    </VBox.margin>
+                 </TextField>
+                 <Button id="btnCalculate" fx:id="btnCalculate" mnemonicParsing="false" onAction="#calculate"
+                         styleClass="calcBtn" text="Calculate">
+                    <VBox.margin>
+                        <Insets top="30.0"/>
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                 </Button>
+             </VBox>
             <Label id="lblResult" fx:id="lblResult" text="Results:">
                <VBox.margin>
                   <Insets top="20.0" />
