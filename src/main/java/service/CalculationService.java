@@ -3,7 +3,6 @@ package service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 import model.CalculationRecord;
 
@@ -12,7 +11,6 @@ public class CalculationService {
     private Connection connection;
 
     public CalculationService() {
-        getConnection();
     }
 
     private void getConnection() {
@@ -24,8 +22,8 @@ public class CalculationService {
     }
 
     public void saveCalculation(CalculationRecord record) throws SQLException {
-        LocalDateTime now = LocalDateTime.now();
         try {
+            getConnection();
             String insert = "INSERT INTO calculation_records (distance, consumption, price, total_fuel, total_cost, language) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(insert);
             ps.setDouble(1, record.getDistance());
@@ -38,6 +36,5 @@ public class CalculationService {
         } catch (Exception e) {
             throw new SQLException("Could not save record: " + e.getMessage());
         }
-
     }
 }

@@ -19,7 +19,7 @@ import java.util.Locale;
 public class TripCalculatorController {
 
     private CalculationService calculationService = new CalculationService();
-    private static LocalizationService localizationService = new LocalizationService();
+    private LocalizationService localizationService = new LocalizationService();
     private Locale currentLocale = new Locale("en", "GB");
     private boolean isRTL = false;
     private List<String> allKeys;
@@ -41,7 +41,6 @@ public class TripCalculatorController {
     public void initialize() {
         // Set initial language
         setLanguage(currentLocale);
-        allKeys = localizationService.getAllKeys();
 
         // Add listeners to clear result when input changes
         txtDistance.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -91,8 +90,8 @@ public class TripCalculatorController {
                 calculationService.saveCalculation(new CalculationRecord(distance, consumption, price, totalFuel, totalCost, currentLocale.getLanguage()));
                 lblInfo.setText(localizationService.getString("results_saved"));
             } catch (Exception e) {
-                lblInfo.setText(localizationService.getString("save_failed"));
                 e.printStackTrace();
+                lblInfo.setText(localizationService.getString("save_failed"));
             }
 
         } catch (Exception e) {
@@ -126,12 +125,16 @@ public class TripCalculatorController {
     }
 
     private void setLanguage(Locale locale) {
-        currentLocale = locale;
-        localizationService.loadStrings(currentLocale.getLanguage());
-        Platform.runLater(() -> {
+        try {
+            currentLocale = locale;
+            localizationService.loadStrings(currentLocale.getLanguage());
+            allKeys = localizationService.getAllKeys();
             updateTexts();
             updateTextDirection();
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayConnectionError();
+        }
     }
 
     private void updateTexts() {

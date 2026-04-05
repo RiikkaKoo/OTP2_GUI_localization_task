@@ -24,6 +24,7 @@ WORKDIR /app
 # Copy project
 COPY pom.xml .
 COPY src ./src
+COPY target/trip_calculator.jar app.jar
 
 RUN mvn clean package -DskipTests
 
