@@ -2,7 +2,11 @@ package model;
 
 public class CalculationRecord {
 
-    private double distance, consumption, price, totalFuel, totalCost;
+    private double distance;
+    private double consumption;
+    private double price;
+    private double totalFuel;
+    private double totalCost;
     private String language;
 
     public CalculationRecord(double distance, double consumption, double price, double totalFuel, double totalCost, String lang) {

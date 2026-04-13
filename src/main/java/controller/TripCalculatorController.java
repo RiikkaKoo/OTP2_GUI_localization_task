@@ -13,29 +13,27 @@ import service.LocalizationService;
 
 import java.text.MessageFormat;
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Locale;
 
 public class TripCalculatorController {
 
-    private CalculationService calculationService = new CalculationService();
-    private LocalizationService localizationService = new LocalizationService();
-    private Locale currentLocale = new Locale("en", "GB");
-    private boolean isRTL = false;
-    private List<String> allKeys;
+    protected CalculationService calculationService = new CalculationService();
+    protected LocalizationService localizationService = new LocalizationService();
+    protected Locale currentLocale = new Locale("en", "GB");
+    protected boolean isRTL = false;
 
-    @FXML private AnchorPane rootBox;
-    @FXML private Label lblInfo;
-    @FXML private Label lblResult;
-    @FXML private Label lblDistance;
-    @FXML private Label lblConsumption;
-    @FXML private Label lblPrice;
+    @FXML protected AnchorPane rootBox;
+    @FXML protected Label lblInfo;
+    @FXML protected Label lblResult;
+    @FXML protected Label lblDistance;
+    @FXML protected Label lblConsumption;
+    @FXML protected Label lblPrice;
 
-    @FXML private TextField txtDistance;
-    @FXML private TextField txtConsumption;
-    @FXML private TextField txtPrice;
+    @FXML protected TextField txtDistance;
+    @FXML protected TextField txtConsumption;
+    @FXML protected TextField txtPrice;
 
-    @FXML private Button btnCalculate;
+    @FXML protected Button btnCalculate;
 
     @FXML
     public void initialize() {
@@ -58,11 +56,12 @@ public class TripCalculatorController {
     }
 
     @FXML
-    private void calculate() {
+    protected void calculate() {
+        String invalid = localizationService.getString("invalid_input");
         try {
 
             if (txtDistance.getText().isEmpty() || txtConsumption.getText().isEmpty() || txtPrice.getText().isEmpty()) {
-                lblResult.setText(localizationService.getString("invalid_input"));
+                lblResult.setText(invalid);
                 return;
             }
 
@@ -71,7 +70,7 @@ public class TripCalculatorController {
             double price = Double.parseDouble(txtPrice.getText());
 
             if (distance <= 0 || consumption <= 0 || price <= 0) {
-                lblResult.setText(localizationService.getString("invalid_input"));
+                lblResult.setText(invalid);
                 return;
             }
 
@@ -90,54 +89,50 @@ public class TripCalculatorController {
                 calculationService.saveCalculation(new CalculationRecord(distance, consumption, price, totalFuel, totalCost, currentLocale.getLanguage()));
                 lblInfo.setText(localizationService.getString("results_saved"));
             } catch (Exception e) {
-                e.printStackTrace();
                 lblInfo.setText(localizationService.getString("save_failed"));
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            lblResult.setText(localizationService.getString("invalid_input"));
+            lblResult.setText(invalid);
         }
     }
 
     @FXML
-    private void onENClick(){
+    protected void onENClick(){
         this.isRTL = false;
         setLanguage(new Locale("en", "GB"));
     }
 
     @FXML
-    private void onFRClick(){
+    protected void onFRClick(){
         this.isRTL = false;
         setLanguage(new Locale("fr", "FR"));
     }
 
     @FXML
-    private void onJPClick(){
+    protected void onJPClick(){
         this.isRTL = false;
         setLanguage(new Locale("ja", "JP"));
     }
 
     @FXML
-    private void onIRClick(){
+    protected void onIRClick(){
         this.isRTL = true;
         setLanguage(new Locale("fa", "IR"));
     }
 
-    private void setLanguage(Locale locale) {
+    protected void setLanguage(Locale locale) {
         try {
             currentLocale = locale;
             localizationService.loadStrings(currentLocale.getLanguage());
-            allKeys = localizationService.getAllKeys();
             updateTexts();
             updateTextDirection();
         } catch (Exception e) {
-            e.printStackTrace();
             displayConnectionError();
         }
     }
 
-    private void updateTexts() {
+    protected void updateTexts() {
         lblDistance.setText(localizationService.getString("distance_label"));
         lblConsumption.setText(localizationService.getString("consumption_label"));
         lblPrice.setText(localizationService.getString("price_label"));
@@ -146,7 +141,7 @@ public class TripCalculatorController {
         lblInfo.setText("");
         }
 
-    private void updateTextDirection() {
+    protected void updateTextDirection() {
 
         Platform.runLater(() -> {
             if (rootBox != null) {
