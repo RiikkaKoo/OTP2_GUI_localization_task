@@ -50,7 +50,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
                     bat """
-                        ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                        ${tool 'SONAR_SCANNER_HOME'}\\bin\\sonar-scanner ^
                         -Dsonar.projectKey=trip_calculator_sonar ^
                         -Dsonar.sources=src ^
                         -Dsonar.projectName=trip_calculator ^
