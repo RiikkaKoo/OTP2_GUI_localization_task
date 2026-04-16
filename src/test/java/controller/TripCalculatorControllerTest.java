@@ -121,4 +121,29 @@ class TripCalculatorControllerTest {
         assertEquals("Invalid input", controller.lblResult.getText());
         assertEquals("", controller.lblInfo.getText());
     }
+
+    @Test
+    void changeLanguage() {
+        LocalizationService localizationService = new LocalizationService();
+
+        controller.onENClick();
+        assertFalse(controller.isRTL);
+        assertEquals("en", controller.currentLocale.getLanguage());
+        assertEquals("GB", controller.currentLocale.getCountry());
+
+        controller.onIRClick();
+        assertTrue(controller.isRTL);
+        assertEquals("fa", controller.currentLocale.getLanguage());
+        assertEquals("IR", controller.currentLocale.getCountry());
+
+        controller.onFRClick();
+        assertFalse(controller.isRTL);
+        assertEquals("fr", controller.currentLocale.getLanguage());
+        assertEquals("FR", controller.currentLocale.getCountry());
+
+        controller.onJPClick();
+        assertFalse(controller.isRTL);
+        assertEquals("ja", controller.currentLocale.getLanguage());
+        assertEquals("JP", controller.currentLocale.getCountry());
+    }
 }
