@@ -7,6 +7,7 @@ pipeline {
 
     environment {
           SONARQUBE_SERVER = 'SonarQubeServer'
+          SONAR_TOKEN = 'SonarQube'
           PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
           DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
           DOCKERHUB_REPO = 'riikkakoo/otp2-gui-localization'
