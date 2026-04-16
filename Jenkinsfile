@@ -17,7 +17,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'DB-localization',
+                            url: 'https://github.com/RiikkaKoo/OTP2_GUI_localization_task.git'
             }
         }
 
