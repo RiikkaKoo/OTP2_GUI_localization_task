@@ -46,13 +46,22 @@ pipeline {
             }
         }
 
+// Add Jenkins credentials for SonarQube: Settings --> Credentials --> Add Credentials --> Secret text
+// --> Secret = the SonarQube token you generated, ID = SonarQube or something similar
+// In Jenkins --> System --> SonarQube servers,
+//select the SonarQube token in the Server authentication token section for your installed SonarQubeServer.
+
+// Make sure you have SonarScanner on your computer and the path to it set as an environmental variable SONAR_SCANNER_HOME.
+// (e.g. "C:\SonarScanner\sonar-scanner-8.0.1.6346-windows-x64")
+// Add SonarScanner tool to Jenkins: Settings --> Tools --> Scroll to SonarQube Scanner --> Add SonarQube Scanner
+// --> Name: SONAR_SCANNER_HOME, SONAR_RUNNER_HOME = the same path you have put in the environmental variables
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
                     bat """
                         ${tool 'SONAR_SCANNER_HOME'}\\bin\\sonar-scanner ^
                         -Dsonar.projectKey=trip_calculator_sonar ^
-                        -Dsonar.sources=src ^
+                        -Dsonar.sources=src/main ^
                         -Dsonar.projectName=trip_calculator ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.java.binaries=target/classes
