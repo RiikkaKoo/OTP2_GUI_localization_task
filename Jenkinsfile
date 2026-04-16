@@ -17,7 +17,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/RiikkaKoo/OTP2_GUI_localization_task.git'
+                git 'https://github.com/RiikkaKoo/OTP2_GUI_localization_task/tree/DB-localization.git'
             }
         }
 
