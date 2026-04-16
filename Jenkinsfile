@@ -6,6 +6,8 @@ pipeline {
     }
 
     environment {
+          SONARQUBE_SERVER = 'SonarQubeServer'
+          SONAR_TOKEN = ${env.SONAR_TOKEN}
           PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
           DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
           DOCKERHUB_REPO = 'riikkakoo/otp2-gui-localization'
@@ -32,17 +34,31 @@ pipeline {
             }
         }
 
-// No tests done for this project
-        //stage('Publish Test Results') {
-            //steps {
-                //junit '**/target/surefire-reports/*.xml'
-            //}
-        //}
-
+        stage('Publish Test Results') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'
+            }
+        }
 
         stage('Publish Coverage Report') {
             steps {
                 recordCoverage(tools: [[parser: 'JACOCO']])
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQubeServer') {
+                    bat """
+                        ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                        -Dsonar.projectKey=trip_calculator_sonar ^
+                        -Dsonar.sources=src ^
+                        -Dsonar.projectName=trip_calculator ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.login=${env.SONAR_TOKEN} ^
+                        -Dsonar.java.binaries=target/classes
+                    """
+                }
             }
         }
 
